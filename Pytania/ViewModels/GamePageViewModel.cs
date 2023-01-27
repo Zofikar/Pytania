@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Pytania.Models;
+using Pytania.Services;
 using Pytania.Views;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Pytania.ViewModels
     public partial class GamePageViewModel : BaseViewModel
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(MyQuiz))]
         FileNamesConnection gameFile;
+        public Quiz MyQuiz => new(this.GameFile.FilePath);
+
 
         public GamePageViewModel() 
         {
-            
         }
     }
 }

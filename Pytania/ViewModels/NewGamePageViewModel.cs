@@ -165,7 +165,7 @@ namespace Pytania.ViewModels
                     }
 
                     lastIndex++;
-                    if (temp.Index != null)
+                    if (temp.Index == null)
                         temp.Index = lastIndex;
                     templates.Add(temp);
                 }

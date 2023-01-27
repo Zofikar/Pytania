@@ -18,24 +18,18 @@ namespace Pytania.ViewModels
     public partial class LoadPageViewModel : BaseViewModel
     {
         [ObservableProperty]
-        List<FileNamesConnection> gameNames = new List<FileNamesConnection>();
+        List<FileNamesConnection> gameNames = new();
 
         [ObservableProperty]
         FileNamesConnection gameName = null;
 
 
-        private string savesDir = Path.Combine(FileSystem.Current.AppDataDirectory, "saves");
+        private string savesDir = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "saves");
 
         public LoadPageViewModel()
         {
-            Reload();
-        }
-
-        public void Reload()
-        {
-            if (this.IsBusy)
-                return;
             this.IsBusy = true;
+            savesDir = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "saves");
             this.GameNames = new List<FileNamesConnection>();
             if (!Directory.Exists(savesDir))
             {

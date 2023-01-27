@@ -9,7 +9,7 @@ namespace Pytania.Services
     public class Quiz
     {
         private string File;
-        private CsvConfiguration csvconfig = new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false };
+        private CsvConfiguration csvconfig = new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false, Delimiter=";" };
         public Quiz(string File) 
         {
             this.File = File;

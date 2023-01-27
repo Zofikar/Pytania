@@ -12,10 +12,4 @@ public partial class LoadPage : ContentPage
 		BindingContext= viewModel;
         this.viewModel= viewModel;
 	}
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        this.viewModel.Reload();
-    }
 }
