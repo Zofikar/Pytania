@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pytania.Views.LoadPage"
+             xmlns:viewmodel="clr-namespace:Pytania.ViewModels"
+             xmlns:models="clr-namespace:Pytania.Models"
+             x:DataType="viewmodel:LoadPageViewModel"
+             Title="LoadPage">
+    <Grid RowDefinitions="*,Auto,Auto, *" ColumnDefinitions="*,3*,*">
+        <Border Grid.Column="1" Grid.Row="1" BackgroundColor="Transparent" Background="Transparent" Padding="0" HorizontalOptions="Center" 
+                StrokeShape="RoundRectangle 20,20,20,20"> 
+            <Picker Title="           Wybierz zapis gry" 
+                    ItemsSource="{Binding GameNames}" SelectedItem="{Binding GameName}" ItemDisplayBinding="{Binding FileNameWithoutExtension}" 
+                    BackgroundColor="{StaticResource Gray300}" 
+                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" 
+                    FontSize="14" MinimumWidthRequest="200" Margin="0"/>
+        </Border>
+        <Button Text="Wczytaj"  Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" Command="{Binding LoadCommand}"/>
+    </Grid>
+</ContentPage>

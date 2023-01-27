@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pytania.Views.NewGamePage"
+             xmlns:viewmodels="clr-namespace:Pytania.ViewModels"
+             x:DataType="viewmodels:NewGamePageViewModel"
+             Title="NewGamePage">
+    <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*">
+        <Button Text="{Binding FileName}" Command="{Binding SelectFileCommand}" Grid.Column="1" Grid.Row="1" BackgroundColor="{StaticResource Gray300}" HeightRequest="40"/>
+        <Frame Padding="0" Grid.Column="1" Grid.Row="2" BackgroundColor="Transparent" BorderColor="{StaticResource Gray400}" HeightRequest="40" CornerRadius="20">
+            <Entry Placeholder="Nazwa gry"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="5" VerticalOptions="Center" Text="{Binding GameName}"/>
+        </Frame>
+        <Grid Grid.Column="1" Grid.Row="3" ColumnSpacing="0" RowSpacing="0" ColumnDefinitions="*,*,*">
+            <Border Stroke="Black" StrokeShape="RoundRectangle 20,0,20,0" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="0">
+                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[0]}" BackgroundColor="{StaticResource Gray300}" Title="  Pierwsza kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+            </Border>
+            <Border Stroke="Black" StrokeShape="RoundRectangle 0,0,0,0" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="1">
+                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[1]}" BackgroundColor="{StaticResource Gray300}" Title="  Druga kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+            </Border>
+            <Border Stroke="Black" StrokeShape="RoundRectangle 0,20,0,20" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="2">
+                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[2]}" BackgroundColor="{StaticResource Gray300}" Title="  Trzecia kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+            </Border>
+        </Grid>
+        <Button Grid.Column="1" Grid.Row="4" BackgroundColor="{StaticResource Gray300}" HeightRequest="40" Text="Stwórz grę" Command="{Binding CreateNewQuizCommand}"/>
+    </Grid>
+</ContentPage>
