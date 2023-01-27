@@ -56,13 +56,16 @@ namespace Pytania.ViewModels
             if (this.GameName == null) 
             {
                 await Toast.Make("Wybierz plik gry").Show();
+                this.IsBusy = false;
                 return;
             }
             else if (!this.GameNames.Contains(this.GameName))
             {
                 await Toast.Make("Wybierz poprawny plik gry").Show();
+                this.IsBusy = false;
                 return;
             }
+            this.IsBusy = false;
             await Shell.Current.GoToAsync("GamePage", true, new Dictionary<string, object>
             {
                 {"GameFile", this.GameName},

@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:Pytania.ViewModels"
              xmlns:models="clr-namespace:Pytania.Models"
              x:DataType="viewmodel:LoadPageViewModel"
+             Shell.TabBarIsVisible="True"
              Title="LoadPage">
     <Grid RowDefinitions="*,Auto,Auto, *" ColumnDefinitions="*,3*,*">
         <Border Grid.Column="1" Grid.Row="1" BackgroundColor="Transparent" Background="Transparent" Padding="0" HorizontalOptions="Center" 

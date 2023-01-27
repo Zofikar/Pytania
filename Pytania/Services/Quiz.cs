@@ -39,6 +39,11 @@ namespace Pytania.Services
             return question;
         }
 
+        private void Remove()
+        {
+
+        }
+
         public async Task<QuestionsTemplate> GetRandomQuestion()
         {
             return await Task.Run(GetRandom);

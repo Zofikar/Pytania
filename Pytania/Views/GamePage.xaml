@@ -6,10 +6,9 @@
              x:DataType="viewmodels:GamePageViewModel"
              Shell.TabBarIsVisible="False"
              Title="GamePage">
-    <VerticalStackLayout>
-        <Label Text="{Binding GameFile.FilePath}"/>
-        <Label Text="{Binding GameFile.FileExension}"/>
-        <Label Text="{Binding GameFile.FileName}"/>
-        <Label Text="{Binding GameFile.FileNameWithoutExtension}"/>
-    </VerticalStackLayout>
+    <Grid RowDefinitions="*,Auto,*,Auto,Auto,*" ColumnDefinitions="*,3*,*">
+        <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+        <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <Button Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Subtitle" Grid.Column="1" Grid.Row="3"/>
+    </Grid>
 </ContentPage>

@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:Pytania.Views"
     Shell.TabBarBackgroundColor="{StaticResource Gray300}"
     Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     Shell.FlyoutBehavior="Disabled">
-    
     <TabBar>
         <Tab Title="Nowa gra">
             <ShellContent

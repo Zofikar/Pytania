@@ -260,5 +260,6 @@ namespace Pytania.ViewModels
             await ParseCsv();
             this.IsBusy = false;
         }
+
     }
 }

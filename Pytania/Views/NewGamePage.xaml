@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Pytania.Views.NewGamePage"
              xmlns:viewmodels="clr-namespace:Pytania.ViewModels"
+             Shell.TabBarIsVisible="True"
              x:DataType="viewmodels:NewGamePageViewModel"
              Title="NewGamePage">
     <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*">
