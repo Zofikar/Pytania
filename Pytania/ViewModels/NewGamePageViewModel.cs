@@ -180,7 +180,7 @@ namespace Pytania.ViewModels
             {
                 await Shell.Current.GoToAsync("GamePage", true, new Dictionary<string, object>
             {
-                {"GameFile", new FileNamesConnection(this.FilePath)},
+                {"GameFile", new FileNamesConnection(System.IO.Path.Combine(this.savesDir, this.SaveFileName))},
             });
             } catch(Exception ex)
             {

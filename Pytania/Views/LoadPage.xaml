@@ -9,12 +9,14 @@
              Title="LoadPage">
     <Grid RowDefinitions="*,Auto,Auto, *" ColumnDefinitions="*,3*,*">
         <Border Grid.Column="1" Grid.Row="1" BackgroundColor="Transparent" Background="Transparent" Padding="0" HorizontalOptions="Center" 
-                StrokeShape="RoundRectangle 20,20,20,20"> 
-            <Picker Title="           Wybierz zapis gry" 
-                    ItemsSource="{Binding GameNames}" SelectedItem="{Binding GameName}" ItemDisplayBinding="{Binding FileNameWithoutExtension}" 
+                StrokeShape="RoundRectangle 20,20,20,20">
+            <VerticalStackLayout Padding="5" Margin="5">
+                <Label Text="Wybierz zapis gry" HorizontalTextAlignment="Center"/>
+                <Picker ItemsSource="{Binding GameNames}" SelectedItem="{Binding GameName}" ItemDisplayBinding="{Binding FileNameWithoutExtension}" 
                     BackgroundColor="{StaticResource Gray300}" 
                     HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" 
-                    FontSize="14" MinimumWidthRequest="200" Margin="0"/>
+                    FontSize="14" MinimumWidthRequest="200" Margin="0" HeightRequest="40"/>
+            </VerticalStackLayout>
         </Border>
         <Button Text="Wczytaj"  Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" Command="{Binding LoadCommand}"/>
     </Grid>

@@ -24,10 +24,10 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 		//Views
-		builder.Services.AddSingleton<NewGamePage>();
+		builder.Services.AddTransient<NewGamePage>();
 		builder.Services.AddTransient<LoadPage>();
         //ViewModels
-        builder.Services.AddSingleton<NewGamePageViewModel>();
+        builder.Services.AddTransient<NewGamePageViewModel>();
         builder.Services.AddTransient<LoadPageViewModel>();
 
 

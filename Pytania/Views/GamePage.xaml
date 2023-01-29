@@ -4,11 +4,26 @@
              x:Class="Pytania.Views.GamePage"
              xmlns:viewmodels="clr-namespace:Pytania.ViewModels"
              x:DataType="viewmodels:GamePageViewModel"
-             Shell.TabBarIsVisible="False"
              Title="GamePage">
-    <Grid RowDefinitions="*,Auto,*,Auto,Auto,*" ColumnDefinitions="*,3*,*">
-        <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-        <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-        <Button Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Game: {0}'}" FontSize="Subtitle" Grid.Column="1" Grid.Row="3"/>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False"/>
+    </Shell.BackButtonBehavior>
+    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*" Padding="5" RowSpacing="10">
+        <Label Grid.Column="0" Grid.Row="0" Text="{Binding QuestionsLeft, StringFormat='Pozostało {0} pytań'}" />
+        <HorizontalStackLayout Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="20" Padding="0" Margin="0">
+            <Label Text="Zapis Automatyczny" VerticalOptions="Start" VerticalTextAlignment="Center"/>
+            <CheckBox IsChecked="{Binding IsAutoSave}" VerticalOptions="Start"/>
+        </HorizontalStackLayout>
+        <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Gra: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+        <Grid Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" ColumnSpacing="0" ColumnDefinitions="Auto,Auto,Auto,*">
+            <Label Text="{Binding Question.Index}" FontSize="Small" Grid.Column="0"/>
+            <Label Text="." FontSize="Small" Grid.Column="1"/>
+            <Label Text="" WidthRequest="10" Grid.Column="2"/>
+            <Label Text="{Binding Question.Question}" FontSize="Small" LineBreakMode="WordWrap" Grid.Column="3"/>
+        </Grid>
+        <Label Grid.Column="1" Grid.Row="3" Text="{Binding Question.Answer}" HorizontalOptions="Center" FontSize="Micro" IsVisible="{Binding IsAnswerVisible}"/>
+        <Button Text="{Binding ButtonText}" FontSize="Subtitle" Grid.Column="1" Grid.Row="4" Command="{Binding ButtonClickedCommand}"/>
+        <Button Grid.Column="2" Grid.Row="5" HeightRequest="50" VerticalOptions="End" HorizontalOptions="End" Text="Powrót" Command="{Binding ReturnCommand}"/>
+        <Button Grid.Column="1" Grid.Row="5" HeightRequest="50" VerticalOptions="End" HorizontalOptions="Center" Text="Zapisz" Command="{Binding SaveCommand}"/>
     </Grid>
 </ContentPage>

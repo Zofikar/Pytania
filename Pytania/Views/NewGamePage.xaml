@@ -6,22 +6,40 @@
              Shell.TabBarIsVisible="True"
              x:DataType="viewmodels:NewGamePageViewModel"
              Title="NewGamePage">
-    <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*">
+    <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*">
         <Button Text="{Binding FileName}" Command="{Binding SelectFileCommand}" Grid.Column="1" Grid.Row="1" BackgroundColor="{StaticResource Gray300}" HeightRequest="40"/>
         <Frame Padding="0" Grid.Column="1" Grid.Row="2" BackgroundColor="Transparent" BorderColor="{StaticResource Gray400}" HeightRequest="40" CornerRadius="20">
             <Entry Placeholder="Nazwa gry"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="5" VerticalOptions="Center" Text="{Binding GameName}"/>
         </Frame>
         <Grid Grid.Column="1" Grid.Row="3" ColumnSpacing="0" RowSpacing="0" ColumnDefinitions="*,*,*">
             <Border Stroke="Black" StrokeShape="RoundRectangle 20,0,20,0" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="0">
-                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[0]}" BackgroundColor="{StaticResource Gray300}" Title="  Pierwsza kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                <VerticalStackLayout Padding="5" Margin="5">
+                    <Label Text="Pierwsza kolumna" HorizontalTextAlignment="Center"/>
+                    <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[0]}" BackgroundColor="{StaticResource Gray300}" HorizontalTextAlignment="Center" 
+                        VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                </VerticalStackLayout>
             </Border>
             <Border Stroke="Black" StrokeShape="RoundRectangle 0,0,0,0" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="1">
-                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[1]}" BackgroundColor="{StaticResource Gray300}" Title="  Druga kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                <VerticalStackLayout Padding="5" Margin="5">
+                    <Label Text="Druga kolumna" HorizontalTextAlignment="Center"/>
+                    <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[1]}" BackgroundColor="{StaticResource Gray300}" HorizontalTextAlignment="Center" 
+                        VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                </VerticalStackLayout>
             </Border>
             <Border Stroke="Black" StrokeShape="RoundRectangle 0,20,0,20" Padding="5,5" BackgroundColor="Transparent" Background="Transparent" StrokeThickness="0.4" Grid.Column="2">
-                <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[2]}" BackgroundColor="{StaticResource Gray300}" Title="  Trzecia kolumna" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                <VerticalStackLayout Padding="5" Margin="5">
+                    <Label Text="Trzecia kolumna" HorizontalTextAlignment="Center"/>
+                    <Picker ItemsSource="{Binding Headerslist}" SelectedItem="{Binding Header[2]}" BackgroundColor="{StaticResource Gray300}" HorizontalTextAlignment="Center" 
+                        VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="13"/>
+                </VerticalStackLayout>
             </Border>
         </Grid>
-        <Button Grid.Column="1" Grid.Row="4" BackgroundColor="{StaticResource Gray300}" HeightRequest="40" Text="Stwórz grę" Command="{Binding CreateNewQuizCommand}"/>
+        <Frame Padding="0" Grid.Column="1" Grid.Row="4" BackgroundColor="Transparent" BorderColor="{StaticResource Gray400}" HeightRequest="40" CornerRadius="20">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Kolumny są nazwane" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <CheckBox IsChecked="{Binding HasHeader}" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Button Grid.Column="1" Grid.Row="5" BackgroundColor="{StaticResource Gray300}" HeightRequest="40" Text="Stwórz grę" Command="{Binding CreateNewQuizCommand}"/>
     </Grid>
 </ContentPage>

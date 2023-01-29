@@ -2,51 +2,110 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using Pytania.Models;
+using System.Text;
 using System.Globalization;
 
 namespace Pytania.Services
 {
     public class Quiz
     {
-        private string File;
-        private CsvConfiguration csvconfig = new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false, Delimiter=";" };
-        public Quiz(string File) 
+        private string FilePath;
+        private Random rnd;
+        public Quiz(string FilePath) 
         {
-            this.File = File;
+            this.FilePath = FilePath;
+            Load();
+            rnd= new Random();
+            foreach(QuestionsTemplate qst in questions)
+            {
+                questionsSave.Add(qst);
+            }
         }
 
-        private QuestionsTemplate GetRandom()
+        private List<QuestionsTemplate> questions = new();
+        private List<QuestionsTemplate> questionsSave = new();
+
+        public int QuestionsLeft
         {
-            List<QuestionsTemplate> records;
-            using (FileStream fs = new FileStream(this.File, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (StreamReader reader = new StreamReader(fs))
-            using (var csv = new CsvReader(reader, csvconfig))
+            get { return questions.Count; }
+        }
+
+        public async void Reload()
+        {
+            questions = new List<QuestionsTemplate>();
+            using (FileStream fs = new FileStream(this.FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite))
+            using (StreamWriter writter = new StreamWriter(fs, Encoding.UTF8))
+            using (var csv = new CsvWriter(writter, new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false, Delimiter = ";" }))
             {
-                records = csv.GetRecords<QuestionsTemplate>().ToList();
-            }
-            int randomNumer = new Random().Next(0, records.Count);
-            QuestionsTemplate question = records.ElementAt(randomNumer);
-            records.RemoveAt(randomNumer);
-            Task.Run(() => 
-            {
-                using (FileStream fs = new FileStream(this.File, FileMode.Open, FileAccess.Write, FileShare.ReadWrite))
-                using (StreamWriter writter = new StreamWriter(fs))
-                using (var csv = new CsvWriter(writter, csvconfig))
+                foreach (QuestionsTemplate question in questionsSave)
                 {
-                    csv.WriteRecords(records);
+                    csv.WriteRecord(question);
+                    csv.NextRecord();
+                    questions.Add(question);
                 }
-            });
+            }
+        }
+
+        public async void Delete()
+        {
+            File.Delete(this.FilePath);
+        }
+
+
+        private Task Load()
+        {
+            using (FileStream fs = new FileStream(this.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (StreamReader reader = new StreamReader(fs, Encoding.UTF8))
+            using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false, Delimiter = ";" }))
+            {
+                questions = csv.GetRecords<QuestionsTemplate>().ToList();
+            }
+            return Task.CompletedTask;
+        }
+
+        private async Task<QuestionsTemplate> GetRandom()
+        {
+            if(QuestionsLeft <= 0)
+                return new QuestionsTemplate()
+                {
+                    Question = " ",
+                    Index = 0,
+                    Answer = " "
+                };
+            int randomNumer = rnd.Next(0, QuestionsLeft);
+            QuestionsTemplate question = questions.ElementAt(randomNumer);
+            questions.RemoveAt(randomNumer);
             return question;
         }
 
-        private void Remove()
+        private Task Save()
         {
-
+            using (FileStream fs = new FileStream(this.FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite))
+            using (StreamWriter writter = new StreamWriter(fs, Encoding.UTF8))
+            using (var csv = new CsvWriter(writter, new CsvConfiguration(CultureInfo.InvariantCulture) { HasHeaderRecord = false, Delimiter = ";" }))
+            {
+                foreach(QuestionsTemplate question in questions) 
+                {
+                    csv.WriteRecord(question);
+                    csv.NextRecord();
+                }
+            }
+            return Task.CompletedTask;
         }
 
         public async Task<QuestionsTemplate> GetRandomQuestion()
         {
             return await Task.Run(GetRandom);
+        }
+
+        public async Task ReloadQuestions()
+        {
+            await Task.Run(Load);
+        }
+
+        public async Task SaveQuestions()
+        {
+            await Task.Run(Save);
         }
     }
 }

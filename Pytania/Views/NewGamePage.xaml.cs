@@ -9,4 +9,10 @@ public partial class NewGamePage : ContentPage
 		InitializeComponent();
 		BindingContext= viewModel;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        BindingContext = new NewGamePageViewModel();
+    }
 }
