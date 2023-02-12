@@ -6,13 +6,11 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="C861BE99-DCE0-4166-9BBD-676FC2C7CD22" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Identity Name="Quiz" Publisher="CN=Paweł Chwalczyk" Version="1.0.4.0" />
 
   <Properties>
-    <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
+    <DisplayName>QuizApp</DisplayName>
+    <PublisherDisplayName>Paweł Chwalczyk</PublisherDisplayName>
     <Logo>$placeholder$.png</Logo>
   </Properties>
 

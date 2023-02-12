@@ -8,18 +8,18 @@
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" IsEnabled="False"/>
     </Shell.BackButtonBehavior>
-    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,*" ColumnDefinitions="*,3*,*" Padding="5" RowSpacing="10">
+    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,3*" ColumnDefinitions="*,3*,*" Padding="5" RowSpacing="10">
+        <Label Grid.Row="2" Margin="5" Text="{Binding FormatedTime}" IsVisible="{Binding Clock}" FontSize="Header"/>
         <Label Grid.Column="0" Grid.Row="0" Text="{Binding QuestionsLeft, StringFormat='Pozostało {0} pytań'}" />
         <HorizontalStackLayout Grid.Row="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="20" Padding="0" Margin="0">
             <Label Text="Zapis Automatyczny" VerticalOptions="Start" VerticalTextAlignment="Center"/>
             <CheckBox IsChecked="{Binding IsAutoSave}" VerticalOptions="Start"/>
         </HorizontalStackLayout>
         <Label Text="{Binding GameFile.FileNameWithoutExtension, StringFormat='Gra: {0}'}" FontSize="Title" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-        <Grid Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" ColumnSpacing="0" ColumnDefinitions="Auto,Auto,Auto,*">
-            <Label Text="{Binding Question.Index}" FontSize="Small" Grid.Column="0"/>
-            <Label Text="." FontSize="Small" Grid.Column="1"/>
-            <Label Text="" WidthRequest="10" Grid.Column="2"/>
-            <Label Text="{Binding Question.Question}" FontSize="Small" LineBreakMode="WordWrap" Grid.Column="3"/>
+        <Grid Grid.Column="1" Grid.Row="2" HorizontalOptions="Center" ColumnDefinitions="*" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="10">
+            <Label Text="Pytanie Nr." FontSize="Small" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsQuestionVisible}" HorizontalOptions="Center"/>
+            <Label Text="{Binding Question.Index}" FontSize="Header" VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="{Binding IsQuestionVisible}" Grid.Row="1" HorizontalOptions="Center" FontAttributes="Bold"/>
+            <Label Grid.Row="2" Text="{Binding Question.Question}" FontSize="Small" LineBreakMode="WordWrap" MaxLines="5" Margin="10" Padding="10"/>
         </Grid>
         <Label Grid.Column="1" Grid.Row="3" Text="{Binding Question.Answer}" HorizontalOptions="Center" FontSize="Micro" IsVisible="{Binding IsAnswerVisible}"/>
         <Button Text="{Binding ButtonText}" FontSize="Subtitle" Grid.Column="1" Grid.Row="4" Command="{Binding ButtonClickedCommand}"/>

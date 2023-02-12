@@ -168,6 +168,7 @@ namespace Pytania.ViewModels
                     if (temp.Index == null)
                         temp.Index = lastIndex;
                     templates.Add(temp);
+
                 }
             }
             using (FileStream fs = new FileStream(System.IO.Path.Combine(this.savesDir, this.SaveFileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
